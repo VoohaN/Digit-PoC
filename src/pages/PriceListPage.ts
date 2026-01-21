@@ -111,6 +111,7 @@ export class PriceListPage {
   }
 
   async verifyCustomersAdded(customers: string[]) {
+    await this.customerTab.click();
     for (const customer of customers) {
       const customerLocator = this.page.locator(`[aria-label="${customer}"]`);
       await expect(customerLocator).toBeVisible();
@@ -118,11 +119,9 @@ export class PriceListPage {
   }
 
   async clickSave() {
-    await expect(this.saveButton).toBeVisible();
-    await expect(this.saveButton).toBeEnabled();
-    await this.saveButton.scrollIntoViewIfNeeded();
-    await this.saveButton.click({ force: true });
-    await this.page.waitForLoadState("networkidle");
+    await this.saveButton.click();
+    await this.page.waitForLoadState("networkidle", { timeout: 5000 });
+    await this.saveButton.click();
     await expect(this.page.locator("h3")).toHaveText("Update price list");
   }
 

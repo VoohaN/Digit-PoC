@@ -72,7 +72,6 @@ test("Create & edit a new customer price list", async ({ page }) => {
     await priceListPage.openPriceList(priceListName);
     await priceListPage.fillPriceListDetails({ priceListName: updatedPriceListName, customers: ['Amazon'] });
     await priceListPage.verifyCustomersAdded(updatedCustomers);
-    await page.waitForTimeout(5000); 
     await priceListPage.clickSave();
 
     // Verify updated customer price list details in the table
